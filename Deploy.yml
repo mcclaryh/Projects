@@ -1,0 +1,32 @@
+# Adds hostname, username, password, and ovf path
+- community.vmware.vmware_deploy_ovf:
+    hostname: '{{ 192.168.51.199 }}'
+    username: '{{ hassan }}'
+    password: '{{ Style41eveN }}'
+    ovf: /192.168.51.199/ui/#/host/storage/datastores/63933275-5a463326-671b-002590dc56bc/ESS_Server_2019.ovf
+    wait_for_ip_address: true
+  delegate_to: localhost
+
+# Deploys a new VM named 'ESS' in specific datacenter/cluster, with network mapping taken from variable and using ova template from an absolute path
+- community.vmware.vmware_deploy_ovf:
+    hostname: '{{ 192.168.51.199 }}'
+    username: '{{ hassan }}'
+    password: '{{ Style41eveN }}'
+    datacenter: Datacenter1
+    cluster: Cluster1
+    datastore: datastore1
+    name: ESS
+    networks: "{u'VM Network':u'{{ ProvisioningNetworkLabel }}'}"
+    power_on: no
+    ovf: /192.168.51.199/ui/#/host/storage/datastores/63933275-5a463326-671b-002590dc56bc/ESS_Server_2019.ovf
+  delegate_to: localhost
+
+- community.vmware.vmware_deploy_ovf:
+    hostname: '{{ 192.168.51.199 }}'
+    username: '{{ hassan }}'
+    password: '{{ Style41eveN }}'
+    datacenter: Datacenter1
+    esxi_hostname: test-server
+    datastore: test-datastore
+    ovf: /192.168.51.199/ui/#/host/storage/datastores/63933275-5a463326-671b-002590dc56bc/ESS_Server_2019.ovf
+  delegate_to: localhost
